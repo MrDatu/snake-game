@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇游戏 - 经典休闲网页小游戏</title>
+    <meta name="description" content="一款经典的贪吃蛇网页游戏，支持电脑和手机操作，有三种难度级别，快来挑战高分吧！">
+    <meta name="keywords" content="贪吃蛇,小游戏,网页游戏,休闲游戏">
+    
+    <!-- 社交媒体分享信息 -->
+    <meta property="og:title" content="贪吃蛇游戏 - 经典休闲网页小游戏">
+    <meta property="og:description" content="一款经典的贪吃蛇网页游戏，支持电脑和手机操作，快来挑战高分吧！">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- 网站图标 -->
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACZZjMAmWYzAJlmMwCZZjMAmWYzAJlmMwCZZjMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAm2g1AJ9sOQCfbDkAn2w5AJ9sOQCfbDkAn2w5AJlmMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAn2w5AJ9sOQCfbDkAn2w5AMaTWADGk1gAn2w5AJ9sOQCZZjMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJ9sOQCfbDkAn2w5AMaTWADGk1gAxpNYAMaTWACfbDkAmWYzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJ9sOQCfbDkAn2w5AMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAJ9sOQCZZjMAAAAAAAAAAAAAAAAAAAAAAJ9sOQCfbDkAn2w5AMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWACfbDkAmWYzAAAAAAAAAAAAn2w5AJ9sOQCfbDkAn2w5AMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAn2w5AJlmMwAAAAAAn2w5AJ9sOQCfbDkAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAJ9sOQCZZjMAn2w5AJ9sOQCfbDkAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWACfbDkAn2w5AJ9sOQCfbDkAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWACfbDkAn2w5AJ9sOQCfbDkAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAJ9sOQCZZjMAn2w5AJ9sOQCfbDkAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWADGk1gAn2w5AJlmMwAAAAAAn2w5AJ9sOQCfbDkAn2w5AMaTWADGk1gAxpNYAMaTWADGk1gAxpNYAMaTWACfbDkAmWYzAAAAAAAAAAAAn2w5AJ9sOQCfbDkAn2w5AJ9sOQDGk1gAxpNYAMaTWADGk1gAxpNYAJ9sOQCZZjMAAAAAAAAAAAAAAAAAAAAAAJ9sOQCfbDkAn2w5AJ9sOQCfbDkAxpNYAMaTWADGk1gAn2w5AJlmMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAn2w5AJ9sOQCfbDkAn2w5AJ9sOQCfbDkAn2w5AJlmMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACfbDkAn2w5AJ9sOQCfbDkAn2w5AJlmMwAAAAAAAAAAAAAAAAA/nwAAPw8AAD4HAAAwAwAAIAMAACABAAAgAQAAAAAAAAAAAAAAAAAAAAEAACABAAAgAwAAMAcAAD4PAAA/nwAA">
+</head>
+<body>
+    <div class="game-container">
+        <div id="start-screen" class="screen">
+            <h1>贪吃蛇游戏</h1>
+            <div class="difficulty-selector">
+                <p>选择难度：</p>
+                <div class="difficulty-buttons">
+                    <button id="easy" class="difficulty-btn active">简单</button>
+                    <button id="medium" class="difficulty-btn">中等</button>
+                    <button id="hard" class="difficulty-btn">困难</button>
+                </div>
+            </div>
+            <button id="start-btn">开始游戏</button>
+        </div>
+        
+        <div id="game-screen" class="screen hidden">
+            <div class="game-header">
+                <div class="score-container">分数: <span id="score">0</span></div>
+                <div class="high-score-container">最高分: <span id="high-score">0</span></div>
+                <div class="game-controls">
+                    <button id="pause-btn">暂停</button>
+                    <button id="mute-btn" class="mute-btn" title="静音/取消静音">🔊</button>
+                </div>
+            </div>
+            <canvas id="game-board"></canvas>
+        </div>
+        
+        <div id="game-over-screen" class="screen hidden">
+            <h2>游戏结束</h2>
+            <p>最终得分: <span id="final-score">0</span></p>
+            <div class="high-scores-container">
+                <h3>最高分记录</h3>
+                <div class="high-scores-table">
+                    <div class="high-score-row">
+                        <span class="difficulty-label">简单模式:</span>
+                        <span id="easy-high-score">0</span>
+                    </div>
+                    <div class="high-score-row">
+                        <span class="difficulty-label">中等模式:</span>
+                        <span id="medium-high-score">0</span>
+                    </div>
+                    <div class="high-score-row">
+                        <span class="difficulty-label">困难模式:</span>
+                        <span id="hard-high-score">0</span>
+                    </div>
+                </div>
+            </div>
+            <button id="restart-btn">重新开始</button>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html> 
